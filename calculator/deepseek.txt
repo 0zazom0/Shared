@@ -1,0 +1,55 @@
+# Výpis definice na začátek
+print("""
+Dedendum mění skutečný radius bez závislosti na adendu a dedendu.
+Adendum se přičítá ke skutečnému dedendu.
+Radius stahuje Adendum i dedendum.
+Diff> ↓skutečný radius a dedendum↓ ↑Adendum↑.
+↑DiffR↑ → ↓skutečný radius menší↓.
+""")
+
+# Vstupní hodnoty
+teeth = int(input("Počet zubů (teeth): "))
+hole = float(input("Průměr díry (Hole): "))
+Ø = float(input("Ø: "))
+Gear = float(input("Gear: "))  # Přidáno Gear
+DiffR = float(input("DiffR: "))
+Diff = float(input("Diff: "))
+
+# Základní výpočty
+base = hole / 2
+adendum = Ø / teeth
+dedendum = adendum * 1.25 + DiffR if DiffR != 0 else adendum * 1.25
+
+# Výpočet radiusu podle Gear
+radius = Gear - adendum  # Podle rovnice: Radius = Gear - Adendum
+
+# Aplikace diferenciálu (Diff)
+if Diff > 0:
+    adendum += Diff
+    radius -= Diff  # Radius se zmenšuje
+elif Diff < 0:
+    adendum -= abs(Diff)
+    radius += abs(Diff)  # Radius se zvětšuje
+else:
+    # Speciální případ pro Diff=0
+    radius = radius  # Zůstává nezměněn
+
+# Výpis výsledků
+print("\nVýsledné hodnoty:")
+print(f"Base (Hole/2): {base:.2f}")
+print(f"Adendum (Ø/teeth): {adendum:.2f}")
+print(f"Dedendum (Adendum * 1.25 + DiffR): {dedendum:.2f}")
+print(f"Radius (Gear - Adendum): {radius:.2f}")
+
+# Vysvětlení efektů
+print("\nVysvětlení:")
+print(f"1. Dedendum = {dedendum:.2f} mění skutečný radius bez závislosti na adendu a dedendu.")
+print(f"2. Adendum = {adendum:.2f} se přičítá ke skutečnému dedendu.")
+print(f"3. Radius = {radius:.2f} stahuje Adendum i dedendum.")
+if Diff != 0:
+    print(f"4. Diff {Diff:.2f}:")
+    print(f"   - Adendum {'zvětšeno' if Diff > 0 else 'zmenšeno'} o {abs(Diff):.2f}")
+    print(f"   - Radius {'zmenšen' if Diff > 0 else 'zvětšen'} o {abs(Diff):.2f}")
+if DiffR != 0:
+    print(f"5. DiffR {DiffR:.2f}:")
+    print(f"   - Skutečný radius menší o {abs(DiffR):.2f}")
