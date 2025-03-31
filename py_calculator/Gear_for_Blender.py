@@ -78,6 +78,19 @@ def Gear_for_Blender():
         except ValueError:
             print("Invalid input\n")
             continue
+        # width
+        width_input = input("width_input: ").strip()
+        if width_input.lower() == 'q':
+            return
+        try:
+            width_input = float(width_input)
+            if width_input <= 0 :
+                print("Invalid input")
+                print("Input shall not be lower than 0\n")
+                continue
+        except ValueError:
+            print("Invalid input\n")
+            continue
         # Diffr
         DiffR = input("DiffR: ").strip()
         if DiffR.lower() == 'q':
@@ -99,6 +112,7 @@ def Gear_for_Blender():
 
 
         # Calculations
+        width = width_input / 2
         Base =( diameter - hole) / 2
         Addendum = diameter / teeth
         Dedendum = Addendum * 1.25 + DiffR if DiffR != 0 else Addendum * 1.25
@@ -118,6 +132,7 @@ def Gear_for_Blender():
         print("\nResults:\n")
         print(f"Number of teeth → {teeth:}")
         print(f"Radius → {Radius:.3f}")
+        print(f"width → {width:.3f}")
         print(f"Base → {Base:.3f}")
         print(f"Dedendum → {Dedendum:.3f}")
         print(f"Addendum → {Addendum:.3f}\n")
